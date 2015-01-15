@@ -14,9 +14,11 @@ module.exports = function (app) {
 router.get('/users', function(req, res) {
 
     //recupere les données
-    fs.readFile('models/user.json');
-    //renvoit le fichier json
-    res.send()
+    fs.readFile('./app/models/users.json', function (err, data) {
+        //renvoit le fichier json
+        res.send(JSON.parse(data));
+    });
+
 });
 
 router.post('/users', function(req, res) {

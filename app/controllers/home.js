@@ -1,6 +1,5 @@
 var express = require('express'),
-  router = express.Router(),
-  Article = require('../models/article');
+  router = express.Router();
 
 module.exports = function (app) {
   app.use('/', router);
