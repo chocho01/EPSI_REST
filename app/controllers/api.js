@@ -24,8 +24,21 @@ router.get('/users', function(req, res) {
 });
 
 router.post('/users', function(req, res) {
-
-
+    console.log(req.body);
+    userValidator.validateUserWithoutId(req.body, function(valid, message) {
+        if (valid) {
+            userParser.createUser(req.body, function(data) {
+                if(data == 403) {
+                    res.sendStatus(403);
+                } else {
+                    res.send(data)
+                }
+            });
+        } else {
+            res.sendStatus(400);
+            console.log(message);
+        }
+    })
 
 });
 
@@ -69,12 +82,7 @@ router.put('/users/:id', function(req, res) {
 
 router.delete('/users/:id', function(req, res) {
     var  id= req.params.id;
-
     userParser.deleteUserById(id, function(data){
-        if(data == 404){
-            res.sendStatus(404);
-        } else {
-            res.send(data);
-        }
+        res.send(data);
     });
 });

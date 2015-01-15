@@ -1,0 +1,27 @@
+<div class="container">
+
+    <div class="page-header">
+        <h2>Ajouter un étudiant</h2>
+    </div>
+
+    <form name="userForm" ng-submit="createUser(userForm.$valid)" novalidate>
+        <div class="form-group">
+            <label for="nom">Nom</label>
+            <input type="text" class="form-control" id="nom" placeholder="Nom" ng-model="user.nom">
+        </div>
+        <div class="form-group">
+            <label for="prenom">Prenom</label>
+            <input type="text" class="form-control" id="prenom" placeholder="Prenom" ng-model="user.prenom">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" ng-model="user.email">
+        </div>
+        <div class="form-group">
+            <label for="telephone">Password</label>
+            <input type="text" class="form-control" id="telephone" placeholder="Telephone" ng-model="user.telephone">
+        </div>
+        <button type="submit" class="btn btn-default">Créer</button>
+    </form>
+</div>
+
