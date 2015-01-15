@@ -18,14 +18,19 @@ app.config ($routeProvider) ->
 
 
 app.controller 'ListEtudiantCtrl', [
-  '$scope', 'Users'
-  ($scope, Users) ->
+  '$scope', 'Users', '$window', '$location'
+  ($scope, Users, $window, $location) ->
 
     $scope.listeUsers = []
 
     Users.getAllUsers.get (d)->
       $scope.listeUsers = d
-      console.log d
+
+    $scope.openUser = (id)->
+      $window.open $location.absUrl()+"user/"+id
+
+    $scope.removeUser = (id)->
+#      $window.open $location.absUrl()+"user/"+id
 
     return
 ]
