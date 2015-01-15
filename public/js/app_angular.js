@@ -37,9 +37,11 @@
       };
 
       $scope.removeUser = function(id) {
+        if($window.confirm('Vous êtes sur ?')) {
           Users.getUser.delete({'id_user': id}, function(d){
-              return $scope.listeUsers = d;
+            $scope.listeUsers = d;
           });
+        }
       };
 
       $scope.editUser = function(id) {
@@ -63,7 +65,7 @@
   ]);
 
   app.controller('EtudiantAddCtrl', [
-    '$scope', 'Users', function($scope, Users) {
+    '$scope', 'Users', '$window', function($scope, Users, $window) {
       $scope.user = {
         "prenom" : null,
         "nom" : null,
@@ -76,11 +78,15 @@
           console.log(d);
         })
       }
+
+      $scope.back = function(){
+        $window.history.back();
+      }
     }
   ]);
 
   app.controller('EtudiantEditCtrl', [
-    '$scope', 'Users', '$routeParams', '$location', function($scope, Users, $routeParams, $location) {
+    '$scope', 'Users', '$routeParams', '$location', '$window', function($scope, Users, $routeParams, $location, $window) {
 
       $scope.user = null;
 
@@ -92,6 +98,10 @@
         Users.getUser.edit({"id_user": $scope.user.id}, $scope.user, function(d){
           $location.path("user/" + $scope.user.id);
         })
+      }
+
+      $scope.back = function(){
+        $window.history.back();
       }
     }
   ]);
