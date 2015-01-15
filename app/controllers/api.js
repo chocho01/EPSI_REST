@@ -68,5 +68,13 @@ router.put('/users/:id', function(req, res) {
 });
 
 router.delete('/users/:id', function(req, res) {
+    var  id= req.params.id;
 
+    userParser.deleteUserById(id, function(data){
+        if(data == 404){
+            res.sendStatus(404);
+        } else {
+            res.send(data);
+        }
+    });
 });

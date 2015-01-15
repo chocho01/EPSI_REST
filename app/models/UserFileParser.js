@@ -42,6 +42,33 @@ UserFileParser.prototype.getUserById = function(id, callback) {
 };
 
 /*
+ * Delete user by id
+ */
+UserFileParser.prototype.deleteUserById = function(id, callback) {
+    fs.readFile(this.filename, function(err, data){
+
+        var ListPeople = (JSON.parse(data));
+        var NewListPeople = [];
+
+        ListPeople.forEach(function(user){
+            if(user.id != id){
+                NewListPeople.push(user);
+            }
+        });
+
+        fs.writeFile('./app/models/users.json', JSON.stringify(NewListPeople), function(){
+            if(NewListPeople == null) {
+                var returnedData = 404;
+            }else{
+                var returnedData = 200;
+            }
+            callback(returnedData);
+        });
+    })
+};
+
+
+/*
  setUsers
  */
 UserFileParser.prototype.setUsers = function(users, callback) {
