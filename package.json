@@ -14,7 +14,8 @@
     "compression": "~1.2.2",
     "method-override": "~2.3.0",
     "glob": "~4.3.1",
-    "ejs": "~1.0.0"
+    "ejs": "~1.0.0",
+    "fs": "0.0.2"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
