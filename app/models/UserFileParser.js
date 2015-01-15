@@ -23,14 +23,23 @@ UserFileParser.prototype.getUserById = function(id, callback) {
     fs.readFile(this.filename, function(err, data){
         var ListPeople = (JSON.parse(data));
 
+        //on cherche l'utilisateur
+        var userFound = null;
         ListPeople.forEach(function(user){
             if(user.id == id){
-                callback( user);
+                 userFound = user;
             }
         });
+
+        //si utilisateur non trouvé, on renvoit 404 (not found)
+        if( userFound == null) {
+            var returnedData = 404;
+        }else {
+            var returnedData = userFound;
+        }
+        callback(returnedData);
     })
 };
-
 
 /*
  setUsers

@@ -31,8 +31,14 @@ router.get('/users/:id', function(req, res) {
    var  id= req.params.id;
 
     userParser.getUserById(id, function(data) {
-        //renvoit le fichier json
-        res.send(data);
+        if(data == 404) {
+            res.sendStatus(404);
+        } else {
+            //renvoit le fichier json
+            res.send(data);
+        }
+
+
     });
 });
 
