@@ -3,7 +3,15 @@
     "id" : 0,
     "nom" : "Bouttaz",
     "prenom" : "Mathieu",
-    "email" : "filsdepute@salope.com"
+    "email" : "filsdepute@salope.com",
+    "telephone" : "0615845698"
+  },
+  {
+    "id" : 0,
+    "nom" : "Choraine",
+    "prenom" : "Mathieu",
+    "email" : "filsdepute@salope.com",
+    "telephone" : "0615845698"
   }
 
 ]
