@@ -5,9 +5,18 @@ var express = require('express');
 var router = express.Router();
 var request = require("request");
 
+module.exports = function (app) {
+    app.use('/api', router);
+};
+
 /* GET User. */
-router.get('/', function(req, res) {
-    request.get("", function(error, response, body){
-        res.send(body);
-    });
+router.get('/users', function(req, res) {
+
+
+});
+
+rout.post('/users', function(req, res) {
+
+
+
 });
