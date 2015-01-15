@@ -28,7 +28,7 @@
 
       $scope.removeUser = function(id) {
           Users.getUser.delete({'id_user': id}, function(d){
-            return $scope.listeUsers = d;
+              return $scope.listeUsers = d;
           });
 
       };
@@ -66,7 +66,7 @@
           },
           'delete': {
             method: 'DELETE',
-            isArray: false
+            isArray: true
           }
         })
       };
