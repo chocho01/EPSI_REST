@@ -30,18 +30,10 @@ router.post('/users', function(req, res) {
 router.get('/users/:id', function(req, res) {
    var  id= req.params.id;
 
-        fs.readFile('./app/models/users.json', function(err, data){
-            var ListPeople = (JSON.parse(data));
-
-            ListPeople.forEach(function(user){
-                console.log(id);
-                if(user.id == id){
-                    res.send(user);
-                }
-            });
-        })
-
-
+    userParser.getUserById(id, function(data) {
+        //renvoit le fichier json
+        res.send(data);
+    });
 });
 
 router.put('/users/:id', function(req,res) {
