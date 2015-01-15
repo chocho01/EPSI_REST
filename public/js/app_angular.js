@@ -14,6 +14,9 @@
     }).when("/add/user", {
       templateUrl: "partials/etudiantCreate.html",
       controller: "EtudiantAddCtrl"
+    }).when("/edit/user/:id_user", {
+      templateUrl: "partials/etudiantCreate.html",
+      controller: "EtudiantEditCtrl"
     }).otherwise({
       redirectTo: '/'
     });
@@ -26,7 +29,7 @@
         return $scope.listeUsers = d;
       });
       $scope.openUser = function(id) {
-        return $window.open($location.absUrl() + "user/" + id);
+        $location.path("user/" + id);
       };
 
       $scope.createUser = function(){
@@ -37,8 +40,12 @@
           Users.getUser.delete({'id_user': id}, function(d){
               return $scope.listeUsers = d;
           });
-
       };
+
+      $scope.editUser = function(id) {
+        $location.path("/edit/user/" + id);
+      };
+
     }
   ]);
 
@@ -72,6 +79,23 @@
     }
   ]);
 
+  app.controller('EtudiantEditCtrl', [
+    '$scope', 'Users', '$routeParams', '$location', function($scope, Users, $routeParams, $location) {
+
+      $scope.user = null;
+
+      Users.getUser.get({'id_user': $routeParams.id_user}, function(d){
+        $scope.user = d;
+      });
+
+      $scope.createUser = function(isValid){
+        Users.getUser.edit({"id_user": $scope.user.id}, $scope.user, function(d){
+          $location.path("user/" + $scope.user.id);
+        })
+      }
+    }
+  ]);
+
   app.factory('Users', [
     '$resource', '$location', function($resource, $location) {
       return {
@@ -95,6 +119,10 @@
           'delete': {
             method: 'DELETE',
             isArray: true
+          },
+          'edit': {
+            method: 'PUT',
+            isArray: false
           }
         })
       };
