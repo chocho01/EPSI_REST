@@ -61,7 +61,7 @@ UserFileParser.prototype.deleteUserById = function(id, callback) {
             if(NewListPeople == null) {
                 var returnedData = 404;
             }else{
-                var returnedData = 200;
+                var returnedData = NewListPeople;
             }
             callback(returnedData);
         });
