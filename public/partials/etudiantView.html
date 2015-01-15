@@ -6,12 +6,18 @@
 
     <ul class="list-group">
         <li class="list-group-item">
-            <span class="glyphicon glyphicon-user">
-                <p>Prenom : {{user.prenom}}</p>
-                <p>Nom : {{user.nom}}</p>
-                <p>Email : {{user.email}}</p>
-                <p>Telephone : {{user.telephone}}</p>
-            </span>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <span class="glyphicon glyphicon-user">
+                {{user.prenom}}
+                </span>
+                </div>
+                <div class="panel-body">
+                    <p>Nom : {{user.nom}}</p>
+                    <p>Email : {{user.email}}</p>
+                    <p>Telephone : {{user.telephone}}</p>
+                </div>
+            </div>
         </li>
     </ul>
 
