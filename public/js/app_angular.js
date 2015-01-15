@@ -25,12 +25,25 @@
       $scope.openUser = function(id) {
         return $window.open($location.absUrl() + "user/" + id);
       };
-      $scope.removeUser = function(id) {};
+
+      $scope.removeUser = function(id) {
+          Users.getUser.delete({'id_user': id}, function(d){
+            return $scope.listeUsers = d;
+          });
+
+      };
     }
   ]);
 
   app.controller('EtudiantCtrl', [
-    '$scope', '$routeParams', function($scope, $routeParams) {
+    '$scope', 'Users', '$routeParams', function($scope, Users, $routeParams) {
+
+      $scope.user = null;
+
+      Users.getUser.get({'id_user': $routeParams.id_user}, function(d){
+        return $scope.user = d;
+      });
+
       console.log($routeParams.id_user);
     }
   ]);
@@ -49,11 +62,11 @@
         }, {
           'get': {
             method: 'GET',
-            isArray: true
+            isArray: false
           },
           'delete': {
             method: 'DELETE',
-            isArray: true
+            isArray: false
           }
         })
       };
