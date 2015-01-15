@@ -4,8 +4,9 @@
 var express = require('express');
 var router = express.Router();
 var request = require("request");
-var fs = require("fs");
+var UserFileParser = require("../models/UserFileParser");
 
+var userParser = new UserFileParser();
 module.exports = function (app) {
     app.use('/api', router);
 };
@@ -13,11 +14,11 @@ module.exports = function (app) {
 /* GET User. */
 router.get('/users', function(req, res) {
 
-    //recupere les données
-    fs.readFile('./app/models/users.json', function (err, data) {
+    userParser.getUsers(function(data) {
         //renvoit le fichier json
-        res.send(JSON.parse(data));
+        res.send(data);
     });
+
 
 });
 
