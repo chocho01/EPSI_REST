@@ -12,11 +12,20 @@ module.exports = function (app) {
 /* GET User. */
 router.get('/users', function(req, res) {
 
+});
+
+router.post('/users', function(req, res) {
 
 });
 
-rout.post('/users', function(req, res) {
+router.get('/users/:id', function(req, res) {
 
+});
 
+router.put('/users/:id', function(req,res) {
+
+});
+
+router.delete('/users/:id', function(req, res) {
 
 });
