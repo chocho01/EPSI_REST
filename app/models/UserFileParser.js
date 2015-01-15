@@ -48,7 +48,7 @@ UserFileParser.prototype.deleteUserById = function(id, callback) {
     fs.readFile(this.filename, function(err, data){
 
         var ListPeople = (JSON.parse(data));
-        var NewListPeople = {};
+        var NewListPeople = [];
 
         ListPeople.forEach(function(user){
             if(user.id != id){
@@ -56,12 +56,15 @@ UserFileParser.prototype.deleteUserById = function(id, callback) {
             }
         });
 
-        fs.writeFile('users.json', NewListPeople.toJSON(), function(){
-            console.log('Sa marche)');
-        })
-    });
-
-
+        fs.writeFile('./app/models/users.json', JSON.stringify(NewListPeople), function(){
+            if(NewListPeople == null) {
+                var returnedData = 404;
+            }else{
+                var returnedData = 200;
+            }
+            callback(returnedData);
+        });
+    })
 };
 
 
