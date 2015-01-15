@@ -5,6 +5,17 @@
     </div>
 
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="user in listeUsers">{{user.prenom}} {{user.nom}}</li>
+        <li class="list-group-item" ng-repeat="user in listeUsers">
+            <span class="glyphicon glyphicon-user"></span> {{user.prenom}} {{user.nom}}
+
+            <div class="btn-group btn-group-xs pull-right ">
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
+        </li>
     </ul>
 </div>
