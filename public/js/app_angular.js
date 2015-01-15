@@ -29,6 +29,10 @@
         return $window.open($location.absUrl() + "user/" + id);
       };
 
+      $scope.createUser = function(){
+        $location.path('/add/user');
+      };
+
       $scope.removeUser = function(id) {
           Users.getUser.delete({'id_user': id}, function(d){
               return $scope.listeUsers = d;
