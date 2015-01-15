@@ -36,9 +36,9 @@ app.controller 'ListEtudiantCtrl', [
 ]
 
 app.controller 'EtudiantCtrl', [
-  '$scope'
-  ($scope) ->
-    console.log 'test'
+  '$scope', '$routeParams'
+  ($scope, $routeParams) ->
+    console.log $routeParams.id_user
     return
 ]
 
@@ -62,6 +62,10 @@ app.factory 'Users', [
       {
         'get': {
           method: 'GET'
+          isArray: true
+        },
+        'delete': {
+          method: 'DELETE'
           isArray: true
         }
       }
