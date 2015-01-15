@@ -6,7 +6,7 @@ var router = express.Router();
 var request = require("request");
 var UserFileParser = require("../models/UserFileParser");
 var UserValidator = require("../models/UserValidator");
-//var User = require("../models/User");
+var User = require("../models/User");
 
 var userParser = new UserFileParser();
 var userValidator = new UserValidator();
@@ -58,16 +58,28 @@ router.get('/users/:id', function(req, res) {
 
 router.put('/users/:id', function(req, res) {
 
-    console.log(req.body.nom);
-    userValidator.validateUserWithoutId(req.body, function(valid, message) {
+    var userGiven = req.body;
+
+    //est ce que les données envoyées sont valides?
+    userValidator.validateUserWithoutId(userGiven, function(valid, message) {
 
         if (valid) {
+            //on vérifie que l'id fourni existe
             userParser.getUserById(req.params.id, function(data) {
                 if(data == 404) {
                     res.sendStatus(404);
                 } else {
-                    User.nom = req.body.nom;
-                    //sinon on met à jour l'utilisateur
+                    userToUpdate = new User();
+                    userToUpdate.id = req.params.id;
+                    userToUpdate.nom = userGiven.nom;
+                    userToUpdate.prenom = userGiven.prenom;
+                    userToUpdate.email = userGiven.email;
+                    userToUpdate.telephone = userGiven.telephone;
+
+                    userParser.addUser(userToUpdate, function(data) {
+                        res.send(data);
+                    });
+
                 }
             });
         } else {
