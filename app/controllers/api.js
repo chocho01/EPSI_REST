@@ -41,5 +41,11 @@ router.put('/users/:id', function(req,res) {
 });
 
 router.delete('/users/:id', function(req, res) {
+    var  id= req.params.id;
+
+    userParser.deleteUserById(id, function(data){
+        //
+        res.send(data);
+    });
 
 });

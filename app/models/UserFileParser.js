@@ -31,6 +31,29 @@ UserFileParser.prototype.getUserById = function(id, callback) {
     })
 };
 
+/*
+ * Delete user by id
+ */
+UserFileParser.prototype.deleteUserById = function(id, callback) {
+    fs.readFile(this.filename, function(err, data){
+
+        var ListPeople = (JSON.parse(data));
+        var NewListPeople = {};
+
+        ListPeople.forEach(function(user){
+            if(user.id != id){
+                NewListPeople.push(user);
+            }
+        });
+
+        fs.writeFile('users.json', NewListPeople.toJSON(), function(){
+            console.log('Sa marche)');
+        })
+    });
+
+
+};
+
 
 /*
  setUsers
