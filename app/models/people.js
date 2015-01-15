@@ -8,5 +8,14 @@ function People (opts) {
   this.phone = opts.phone || '';
 }
 
+function getUsers() {
+  //recupere les données
+  fs.readFile('./app/models/users.json', function (err, data) {
+    //renvoit le fichier json
+    return JSON.parse(data);
+  });
+
+}
+
 module.exports = People;
 
