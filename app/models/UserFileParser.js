@@ -68,6 +68,31 @@ UserFileParser.prototype.deleteUserById = function(id, callback) {
 };
 
 
+UserFileParser.prototype.addUser = function(ParamUser, callback) {
+    fs.readFile(this.filename, function(err, data){
+
+        var ListPeople = (JSON.parse(data));
+        var NewListPeople = [];
+
+        ListPeople.forEach(function(existingUser){
+            if(ParamUser.id != existingUser.id){
+                NewListPeople.push(existingUser);
+            }
+        });
+        //on ajoute le nouvel utilisateur
+        NewListPeople.push(ParamUser);
+
+        fs.writeFile('./app/models/users.json', JSON.stringify(NewListPeople), function(){
+            if(NewListPeople == null) {
+                var returnedData = 404;
+            }else{
+                var returnedData = 200;
+            }
+            callback(returnedData);
+        });
+    })
+};
+
 /*
  setUsers
  */
