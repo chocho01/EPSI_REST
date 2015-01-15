@@ -1,4 +1,4 @@
-.idea/
+/.idea/
 .sass-cache/
 node_git
-*.imp
+*.impgit
