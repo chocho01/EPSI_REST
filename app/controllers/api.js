@@ -4,6 +4,7 @@
 var express = require('express');
 var router = express.Router();
 var request = require("request");
+var fs = require("fs");
 
 module.exports = function (app) {
     app.use('/api', router);
@@ -12,10 +13,13 @@ module.exports = function (app) {
 /* GET User. */
 router.get('/users', function(req, res) {
 
-
+    //recupere les données
+    fs.readFile('models/user.json');
+    //renvoit le fichier json
+    res.send()
 });
 
-rout.post('/users', function(req, res) {
+router.post('/users', function(req, res) {
 
 
 
