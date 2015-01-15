@@ -11,6 +11,9 @@
     }).when("/user/:id_user", {
       templateUrl: "partials/etudiantView.html",
       controller: "EtudiantCtrl"
+    }).when("/add/user", {
+      templateUrl: "partials/etudiantCreate.html",
+      controller: "EtudiantAddCtrl"
     }).otherwise({
       redirectTo: '/'
     });
@@ -48,6 +51,23 @@
     }
   ]);
 
+  app.controller('EtudiantAddCtrl', [
+    '$scope', 'Users', function($scope, Users) {
+      $scope.user = {
+        "prenom" : null,
+        "nom" : null,
+        "email" : null,
+        "telephone" : null
+      }
+
+      $scope.createUser = function(isValid){
+        Users.getAllUsers.create($scope.user, function(d){
+          console.log(d);
+        })
+      }
+    }
+  ]);
+
   app.factory('Users', [
     '$resource', '$location', function($resource, $location) {
       return {
@@ -55,6 +75,10 @@
           'get': {
             method: 'GET',
             isArray: true
+          },
+          'create': {
+            method: 'POST',
+            isArray: false
           }
         }),
         getUser: $resource($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/api/users/:id_user', {

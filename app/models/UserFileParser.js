@@ -16,6 +16,7 @@ UserFileParser.prototype.getUsers = function(callback) {
         callback( JSON.parse(data));
     });
 };
+
 /*
  * Get User By Id
  */
@@ -49,22 +50,45 @@ UserFileParser.prototype.deleteUserById = function(id, callback) {
 
         var ListPeople = (JSON.parse(data));
         var NewListPeople = [];
+        var returnedStatus = 200
 
         ListPeople.forEach(function(user){
-            if(user.id != id){
+            if(user.id != id)
                 NewListPeople.push(user);
-            }
         });
 
         fs.writeFile('./app/models/users.json', JSON.stringify(NewListPeople), function(){
             if(NewListPeople == null) {
                 var returnedData = 404;
             }else{
-                var returnedData = NewListPeople;
+                var returnedData = 200;
             }
             callback(returnedData);
         });
     })
+};
+
+/*
+* Create a user
+ */
+UserFileParser.prototype.createUser = function(newUser, callback) {
+
+    if(newUser==null || !newUser){
+        callback(403)
+    }
+    else {
+        fs.readFile(this.filename, function (err, data) {
+
+            var ListPeople = (JSON.parse(data));
+
+            newUser.id = ListPeople[ListPeople.length - 1] + 1
+            ListPeople.push(newUser)
+
+            fs.writeFile('./app/models/users.json', JSON.stringify(ListPeople), function () {
+                callback(newUser);
+            });
+        })
+    }
 };
 
 
