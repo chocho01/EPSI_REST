@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="page-header">
-        <h2>Ajouter un étudiant</h2>
+        <h2>Ajouter ou modifier un étudiant</h2>
     </div>
 
     <form name="userForm" ng-submit="createUser(userForm.$valid)" novalidate>
@@ -18,11 +18,11 @@
             <input type="email" class="form-control" id="email" placeholder="Email" ng-model="user.email">
         </div>
         <div class="form-group">
-            <label for="telephone">Password</label>
+            <label for="telephone">Téléphone</label>
             <input type="text" class="form-control" id="telephone" placeholder="Telephone" ng-model="user.telephone">
         </div>
         <button type="button" class="btn btn-warning" ng-click="back()">Retour</button>
-        <button type="submit" class="btn btn-success">Créer</button>
+        <button type="submit" class="btn btn-success">Enregistrer</button>
     </form>
 </div>
 
