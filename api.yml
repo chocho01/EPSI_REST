@@ -1,4 +1,4 @@
-resourcePath: /api
+resourcePath: /users
 description: All about API
 apis:
 
@@ -19,6 +19,18 @@ apis:
     notes: Ajouter un utilisateur
     responseClass: User
     nickname: createUser
+    parameters:
+        - name: body
+          dataType: User
+          paramType: body
+          required: true
+          description: Ton object User
+
+  - httpMethod: PUT
+    summary: Modifier un utilisateur
+    notes: Modifier un utilisateur
+    responseClass: User
+    nickname: editUser
     parameters:
         - name: body
           dataType: User
@@ -47,9 +59,13 @@ models:
       properties:
         nom:
           type: String
+          required: true
         prenom:
           type: String
+          required: true
         email:
           type: String
+          required: true
         telephone:
           type: String
+          required: true
