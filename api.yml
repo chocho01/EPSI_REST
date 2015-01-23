@@ -7,7 +7,6 @@ apis:
 
   - httpMethod: GET
     summary: Récuperer la liste de tous les utilisateurs
-    notes: Récuperer la liste de tous les utilisateurs
     responseClass: User
     nickname: getAllUsers
 
@@ -16,7 +15,6 @@ apis:
 
   - httpMethod: POST
     summary: Ajouter un utilisateur
-    notes: Ajouter un utilisateur
     responseClass: User
     nickname: createUser
     parameters:
@@ -34,11 +32,36 @@ apis:
     responseClass: User
     nickname: getUserById
     parameters:
-            - name: id
-              dataType: String
-              paramType: path
-              required: true
-              description: Ton object User
+        - name: id
+          dataType: String
+          paramType: path
+          required: true
+
+- path: /api/users/{id}
+  operations:
+
+  - httpMethod: Put
+    summary: Modifier un utilisateur par son ID
+    responseClass: User
+    nickname: updateUserById
+    parameters:
+        - name: id
+          dataType: String
+          paramType: path
+          required: true
+
+- path: /api/users/{id}
+  operations:
+
+  - httpMethod: Delete
+    summary: Supprimer un utilisateur par son ID
+    responseClass: User
+    nickname: deleteUserById
+    parameters:
+        - name: id
+          dataType: String
+          paramType: path
+          required: true
 
 
 models:
