@@ -2,7 +2,7 @@ resourcePath: /api
 description: All about API
 apis:
 
-- path: /users
+- path: /api/users
   operations:
 
   - httpMethod: GET
