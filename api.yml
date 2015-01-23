@@ -6,15 +6,12 @@ apis:
   operations:
 
   - httpMethod: GET
-    summary: Récuperer la liste de tous les utilisateurs
+    summary: Get the lsit of all Users
     responseClass: User
     nickname: getAllUsers
 
-- path: /api/users
-  operations:
-
   - httpMethod: POST
-    summary: Ajouter un utilisateur
+    summary: Add a new user User
     responseClass: User
     nickname: createUser
     parameters:
@@ -23,58 +20,55 @@ apis:
           paramType: body
           required: true
           description: Ton object User
+    responseMessages:
+        - code: 400
+          message: Invalid parameters
 
-  - httpMethod: PUT
-    summary: Modifier un utilisateur
-    notes: Modifier un utilisateur
-    responseClass: User
-    nickname: editUser
-    parameters:
-        - name: body
-          dataType: User
-          paramType: body
-          required: true
-          description: Ton object User
 
 - path: /api/users/{id}
   operations:
 
-  - httpMethod: Get
-    summary: Récuperer un utilisateur par son ID
+  - httpMethod: GET
+    summary: Get an existing user by his ID
     responseClass: User
     nickname: getUserById
     parameters:
         - name: id
-          dataType: String
+          dataType: Integer
           paramType: path
           required: true
+    responseMessages:
+        - code: 404
+          message: User not found
 
-- path: /api/users/{id}
-  operations:
-
-  - httpMethod: Put
-    summary: Modifier un utilisateur par son ID
+  - httpMethod: PUT
+    summary: Update an existing user by his id
     responseClass: User
     nickname: updateUserById
     parameters:
         - name: id
-          dataType: String
+          dataType: Integer
           paramType: path
           required: true
 
-- path: /api/users/{id}
-  operations:
+        - name: body
+          dataType: User
+          paramType: body
+          required: true
+          description: Your User
 
   - httpMethod: Delete
-    summary: Supprimer un utilisateur par son ID
+    summary: Delete a user by his Id
     responseClass: User
     nickname: deleteUserById
     parameters:
         - name: id
-          dataType: String
+          dataType: Integer
           paramType: path
           required: true
-
+    responseMessages:
+        - code: 404
+          message: User not found
 
 models:
     User:
