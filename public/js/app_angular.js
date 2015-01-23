@@ -2,7 +2,9 @@
 (function() {
   var app;
 
-  app = angular.module('EtudiantEPSIApp', ['ngResource', 'ngRoute']);
+  app = void 0;
+
+  app = angular.module("EtudiantEPSIApp", ["ngResource", "ngRoute"]);
 
   app.config(function($routeProvider) {
     $routeProvider.when("/", {
@@ -18,124 +20,85 @@
       templateUrl: "partials/etudiantCreate.html",
       controller: "EtudiantEditCtrl"
     }).otherwise({
-      redirectTo: '/'
+      redirectTo: "/"
     });
   });
 
-  app.controller('ListEtudiantCtrl', [
-    '$scope', 'Users', '$window', '$location', function($scope, Users, $window, $location) {
-      $scope.listeUsers = [];
-      Users.getAllUsers.get(function(d) {
-        return $scope.listeUsers = d;
+  app.controller("EtudiantCtrl", [
+    "$scope", "Users", "$routeParams", function($scope, Users, $routeParams) {
+      $scope.user = null;
+      return $scope.user = Users.get({
+        id: $routeParams.id_user
       });
+    }
+  ]);
+
+  app.controller("EtudiantAddCtrl", [
+    "$scope", "Users", "$window", function($scope, Users, $window) {
+      $scope.user = new Users();
+      $scope.createUser = function(isValid) {
+        $scope.user.$save(function(d) {
+          console.log(d);
+        });
+      };
+      return $scope.back = function() {
+        $window.history.back();
+      };
+    }
+  ]);
+
+  app.controller("ListEtudiantCtrl", [
+    "$scope", "Users", "$window", "$location", function($scope, Users, $window, $location) {
+      $scope.listeUsers = [];
+      $scope.listeUsers = Users.query();
       $scope.openUser = function(id) {
         $location.path("user/" + id);
       };
-
-      $scope.createUser = function(){
-        $location.path('/add/user');
+      $scope.createUser = function() {
+        $location.path("/add/user");
       };
-
       $scope.removeUser = function(id) {
-        if($window.confirm('Vous êtes sur ?')) {
-          Users.getUser.delete({'id_user': id}, function(d){
-            $scope.listeUsers = d;
+        if ($window.confirm("Vous êtes sur ?")) {
+          return Users["delete"]({
+            id: id
+          }, function(d) {
+            return $scope.listeUsers = d;
           });
         }
       };
-
-      $scope.editUser = function(id) {
+      return $scope.editUser = function(id) {
         $location.path("/edit/user/" + id);
       };
-
     }
   ]);
 
-  app.controller('EtudiantCtrl', [
-    '$scope', 'Users', '$routeParams', function($scope, Users, $routeParams) {
-
+  app.controller("EtudiantEditCtrl", [
+    "$scope", "Users", "$routeParams", "$location", "$window", function($scope, Users, $routeParams, $location, $window) {
       $scope.user = null;
-
-      Users.getUser.get({'id_user': $routeParams.id_user}, function(d){
-        return $scope.user = d;
+      $scope.user = Users.get({
+        id: $routeParams.id_user
       });
-
-      console.log($routeParams.id_user);
-    }
-  ]);
-
-  app.controller('EtudiantAddCtrl', [
-    '$scope', 'Users', '$window', function($scope, Users, $window) {
-      $scope.user = {
-        "prenom" : null,
-        "nom" : null,
-        "email" : null,
-        "telephone" : null
-      }
-
-      $scope.createUser = function(isValid){
-        Users.getAllUsers.create($scope.user, function(d){
-          console.log(d);
-        })
-      }
-
-      $scope.back = function(){
-        $window.history.back();
-      }
-    }
-  ]);
-
-  app.controller('EtudiantEditCtrl', [
-    '$scope', 'Users', '$routeParams', '$location', '$window', function($scope, Users, $routeParams, $location, $window) {
-
-      $scope.user = null;
-
-      Users.getUser.get({'id_user': $routeParams.id_user}, function(d){
-        $scope.user = d;
-      });
-
-      $scope.createUser = function(isValid){
-        Users.getUser.edit({"id_user": $scope.user.id}, $scope.user, function(d){
+      $scope.createUser = function(isValid) {
+        $scope.user.$update({
+          id: $scope.user.id
+        }, function(d) {
           $location.path("user/" + $scope.user.id);
-        })
-      }
-
-      $scope.back = function(){
+        });
+      };
+      return $scope.back = function() {
         $window.history.back();
-      }
+      };
     }
   ]);
 
-  app.factory('Users', [
-    '$resource', '$location', function($resource, $location) {
-      return {
-        getAllUsers: $resource($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/api/users/', {}, {
-          'get': {
-            method: 'GET',
-            isArray: true
-          },
-          'create': {
-            method: 'POST',
-            isArray: false
-          }
-        }),
-        getUser: $resource($location.protocol() + '://' + $location.host() + ':' + $location.port() + '/api/users/:id_user', {
-          id_user: this.id_user
-        }, {
-          'get': {
-            method: 'GET',
-            isArray: false
-          },
-          'delete': {
-            method: 'DELETE',
-            isArray: true
-          },
-          'edit': {
-            method: 'PUT',
-            isArray: false
-          }
-        })
-      };
+  app.factory("Users", [
+    "$resource", "$location", function($resource, $location) {
+      return $resource($location.protocol() + "://" + $location.host() + ":" + $location.port() + "/api/users/:id", {}, {
+        update: {
+          method: "PUT",
+          isArray: true
+        }
+      });
     }
   ]);
 

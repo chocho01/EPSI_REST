@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 var methodOverride = require('method-override');
 
+var swagger = require('swagger-express');
+
 module.exports = function(app, config) {
   app.set('views', config.root + '/app/views');
   app.set('view engine', 'ejs');
@@ -22,6 +24,20 @@ module.exports = function(app, config) {
   app.use(compress());
   app.use(express.static(config.root + '/public'));
   app.use(methodOverride());
+
+
+  //swagger(app, {
+  //  title : 'express validation swagger',
+  //  statics : '/public/swagger/',
+  //  resources : '/swagger/',
+  //  applicationUrl : 'http://localhost:3000',
+  //  routes : [
+  //    { page : 'user', method : 'GET',    path: '/user', validation : validation.user.get },
+  //    { page : 'user', method : 'POST',   path: '/user', validation : validation.user.post },
+  //    { page : 'user', method : 'DELETE', path: '/user', validation : validation.user.del },
+  //    { page : 'user', method : 'PUT',    path: '/user', validation : validation.user.put }
+  //  ]
+  //});
 
   var controllers = glob.sync(config.root + '/app/controllers/*.js');
   controllers.forEach(function (controller) {
