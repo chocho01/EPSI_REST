@@ -36,9 +36,11 @@ app.controller "EtudiantAddCtrl", [
   "$location"
   ($scope, Users, $window, $location) ->
     $scope.user = new Users()
+    $scope.action = "Ajouter"
 
     $scope.createUser = (isValid) ->
       $scope.user.$save (d) ->
+        console.log d
         $location.path "/"
         return
 
@@ -84,7 +86,7 @@ app.controller "EtudiantEditCtrl", [
   "$location"
   "$window"
   ($scope, Users, $routeParams, $location, $window) ->
-
+    $scope.action = "Modifier"
     $scope.user = null
 
     $scope.user = Users.get {id: $routeParams.id_user}

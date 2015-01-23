@@ -81,7 +81,7 @@ UserFileParser.prototype.createUser = function(newUser, callback) {
 
             var ListPeople = (JSON.parse(data));
 
-            newUser.id = ListPeople[ListPeople.length - 1] + 1
+            newUser.id = ListPeople.length + 1
             ListPeople.push(newUser)
 
             fs.writeFile('./app/models/users.json', JSON.stringify(ListPeople), function () {

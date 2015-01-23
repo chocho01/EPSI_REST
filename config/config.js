@@ -8,7 +8,7 @@ var config = {
     app: {
       name: 'epsi-rest'
     },
-    port: 3000,
+    port: 3002
   },
 
   test: {
@@ -16,7 +16,7 @@ var config = {
     app: {
       name: 'epsi-rest'
     },
-    port: 3000,
+    port: 3002
   },
 
   production: {
@@ -24,7 +24,7 @@ var config = {
     app: {
       name: 'epsi-rest'
     },
-    port: 3000,
+    port: 3002
   }
 };
 
