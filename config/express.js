@@ -28,7 +28,7 @@ module.exports = function(app, config) {
     app.use(swagger.init(app, {
         apiVersion: '1.0',
         swaggerVersion: '1.0',
-        basePath: 'http://localhost:3000',
+        basePath: 'http://epsi.martin-choraine.fr',
         swaggerUI: './public/swagger/',
         apis: ['./api.yml']
     }))

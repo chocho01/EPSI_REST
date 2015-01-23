@@ -36,8 +36,10 @@
   app.controller("EtudiantAddCtrl", [
     "$scope", "Users", "$window", "$location", function($scope, Users, $window, $location) {
       $scope.user = new Users();
+      $scope.action = "Ajouter";
       $scope.createUser = function(isValid) {
         $scope.user.$save(function(d) {
+          console.log(d);
           $location.path("/");
         });
       };
@@ -74,6 +76,7 @@
 
   app.controller("EtudiantEditCtrl", [
     "$scope", "Users", "$routeParams", "$location", "$window", function($scope, Users, $routeParams, $location, $window) {
+      $scope.action = "Modifier";
       $scope.user = null;
       $scope.user = Users.get({
         id: $routeParams.id_user

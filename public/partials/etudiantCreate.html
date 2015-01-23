@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="page-header">
-        <h2>Ajouter un étudiant</h2>
+        <h2>{{action}} un étudiant</h2>
     </div>
 
     <form name="userForm" ng-submit="createUser(userForm.$valid)" novalidate>
@@ -22,7 +22,7 @@
             <input type="text" class="form-control" id="telephone" placeholder="Telephone" ng-model="user.telephone">
         </div>
         <button type="button" class="btn btn-warning" ng-click="back()">Retour</button>
-        <button type="submit" class="btn btn-success">Créer</button>
+        <button type="submit" class="btn btn-success">{{action}}</button>
     </form>
 </div>
 
