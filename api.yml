@@ -9,9 +9,37 @@ apis:
     summary: Récuperer la liste de tous les utilisateurs
     notes: Récuperer la liste de tous les utilisateurs
     responseClass: User
-    nickname: login
-    consumes:
-      - text/html
+    nickname: getAllUsers
+
+- path: /api/users
+  operations:
+
+  - httpMethod: POST
+    summary: Ajouter un utilisateur
+    notes: Ajouter un utilisateur
+    responseClass: User
+    nickname: createUser
+    parameters:
+        - name: body
+          dataType: User
+          paramType: body
+          required: true
+          description: Ton object User
+
+- path: /api/users/{id}
+  operations:
+
+  - httpMethod: Get
+    summary: Récuperer un utilisateur par son ID
+    responseClass: User
+    nickname: getUserById
+    parameters:
+            - name: id
+              dataType: String
+              paramType: path
+              required: true
+              description: Ton object User
+
 
 models:
     User:
