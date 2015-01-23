@@ -49,6 +49,7 @@
     }
 
     SwaggerApi.prototype.build = function() {
+        console.log(this.discoveryUrl);
       var _this = this;
       this.progress('fetching resource list: ' + this.discoveryUrl);
       return jQuery.getJSON(this.discoveryUrl, function(response) {
@@ -66,6 +67,7 @@
           _this.basePath = _this.discoveryUrl.substring(0, _this.discoveryUrl.lastIndexOf('/'));
           log('derived basepath from discoveryUrl as ' + _this.basePath);
         }
+          console.log(this.basePath);
         _this.apis = {};
         _this.apisArray = [];
         if (response.resourcePath != null) {

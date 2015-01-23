@@ -28,10 +28,10 @@ module.exports = function(app, config) {
     app.use(swagger.init(app, {
         apiVersion: '1.0',
         swaggerVersion: '1.0',
-        basePath: 'http://epsi.martin-choraine.fr',
+        basePath: 'http://localhost:'+config.port,
         swaggerUI: './public/swagger/',
         apis: ['./api.yml']
-    }))
+    }));
 
     var controllers = glob.sync(config.root + '/app/controllers/*.js');
     controllers.forEach(function (controller) {
