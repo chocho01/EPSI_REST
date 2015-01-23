@@ -2,35 +2,26 @@ resourcePath: /api
 description: All about API
 apis:
 
-- path: /login
+- path: /users
   operations:
 
-  - httpMethod: POST
-    summary: Login with username and password
-    notes: Returns a user based on username
+  - httpMethod: GET
+    summary: Récuperer la liste de tous les utilisateurs
+    notes: Récuperer la liste de tous les utilisateurs
     responseClass: User
     nickname: login
     consumes:
       - text/html
-    parameters:
-
-    - name: username
-      dataType: string
-      paramType: query
-      required: true
-      description: Your username
-
-    - name: password
-      dataType: string
-      paramType: query
-      required: true
-      description: Your password
 
 models:
     User:
       id: User
       properties:
-        username:
+        nom:
           type: String
-        password:
+        prenom:
+          type: String
+        email:
+          type: String
+        telephone:
           type: String
