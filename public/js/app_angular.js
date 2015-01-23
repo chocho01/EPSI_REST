@@ -34,11 +34,11 @@
   ]);
 
   app.controller("EtudiantAddCtrl", [
-    "$scope", "Users", "$window", function($scope, Users, $window) {
+    "$scope", "Users", "$window", "$location", function($scope, Users, $window, $location) {
       $scope.user = new Users();
       $scope.createUser = function(isValid) {
         $scope.user.$save(function(d) {
-          console.log(d);
+          $location.path("/");
         });
       };
       return $scope.back = function() {
@@ -96,6 +96,10 @@
       return $resource($location.protocol() + "://" + $location.host() + ":" + $location.port() + "/api/users/:id", {}, {
         update: {
           method: "PUT",
+          isArray: false
+        },
+        "delete": {
+          method: "DELETE",
           isArray: true
         }
       });

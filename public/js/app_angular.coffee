@@ -33,12 +33,13 @@ app.controller "EtudiantAddCtrl", [
   "$scope"
   "Users"
   "$window"
-  ($scope, Users, $window) ->
+  "$location"
+  ($scope, Users, $window, $location) ->
     $scope.user = new Users()
 
     $scope.createUser = (isValid) ->
       $scope.user.$save (d) ->
-        console.log d
+        $location.path "/"
         return
 
       return
@@ -106,6 +107,9 @@ app.factory "Users", [
     return $resource($location.protocol() + "://" + $location.host() + ":" + $location.port() + "/api/users/:id", {},
         update:
           method: "PUT"
+          isArray: false
+        delete:
+          method: "DELETE"
           isArray: true
 
     )
