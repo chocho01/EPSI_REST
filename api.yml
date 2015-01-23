@@ -66,9 +66,6 @@ apis:
           dataType: Integer
           paramType: path
           required: true
-    responseMessages:
-        - code: 404
-          message: User not found
 
 models:
     User:
