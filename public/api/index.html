@@ -18,8 +18,12 @@
 
     <script type="text/javascript">
 	$(function () {
+        pathArray = window.location.href.split( '/' );
+        protocol = pathArray[0];
+        host = pathArray[2];
+        url = protocol + '//' + host;
 	    window.swaggerUi = new SwaggerUi({
-                discoveryUrl: "http://localhost:3002/api-docs.json",
+                discoveryUrl: url+"/api-docs.json",
                 apiKey:"special-key",
                 dom_id:"swagger-ui-container",
                 supportHeaderParams: false,
