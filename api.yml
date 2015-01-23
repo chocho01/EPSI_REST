@@ -1,12 +1,14 @@
 resourcePath: /users
 description: All about API
-apis:
+produces:
+- application/json
 
+apis:
 - path: /api/users
   operations:
 
   - httpMethod: GET
-    summary: Get the lsit of all Users
+    summary: Get the list of all Users
     responseClass: User
     nickname: getAllUsers
 
@@ -22,12 +24,10 @@ apis:
           description: Ton object User
     responseMessages:
         - code: 400
-          message: Invalid parameters
-
+          message: Invalid User parameters
 
 - path: /api/users/{id}
   operations:
-
   - httpMethod: GET
     summary: Get an existing user by his ID
     responseClass: User
@@ -50,12 +50,16 @@ apis:
           dataType: Integer
           paramType: path
           required: true
-
         - name: body
           dataType: User
           paramType: body
           required: true
           description: Your User
+    responseMessages:
+        - code: 404
+          message: User not found
+        - code: 400
+          message: Invalid User parameters
 
   - httpMethod: Delete
     summary: Delete a user by his Id
