@@ -7,12 +7,25 @@ var request = require("request");
 var UserFileParser = require("../models/UserFileParser");
 var UserValidator = require("../models/UserValidator");
 var User = require("../models/User");
+var api = require('express-api-docs');
 
 var userParser = new UserFileParser();
 var userValidator = new UserValidator();
 module.exports = function (app) {
     app.use('/api', router);
 };
+
+router.get('/users', function(req, res) {
+
+    userParser.getUsers(function(data) {
+        //renvoit le fichier json
+        res.send(data);
+    });
+});
+
+router.post('/info', function(req, res) {
+
+});
 
 /* GET User. */
 router.get('/users', function(req, res) {
