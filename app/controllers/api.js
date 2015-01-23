@@ -37,7 +37,7 @@ router.get('/users', function(req, res) {
 });
 
 router.post('/users', function(req, res) {
-    console.log(req.body);
+    //est ce que les données envoyées sont valides?
     userValidator.validateUserWithoutId(req.body, function(valid, message) {
         if (valid) {
             userParser.createUser(req.body, function(data) {
@@ -49,7 +49,6 @@ router.post('/users', function(req, res) {
             });
         } else {
             res.sendStatus(400);
-            console.log(message);
         }
     })
 
@@ -97,7 +96,6 @@ router.put('/users/:id', function(req, res) {
             });
         } else {
             res.sendStatus(400);
-            console.log(message);
         }
 
     });
